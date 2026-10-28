@@ -92,7 +92,7 @@ pub fn main(init: std.process.Init) !void {
 
     const src = try src_buffer.toOwnedSliceSentinel(0);
     defer gpa.free(src);
-    const ast = try std.zig.Ast.parse(arena, src, .zig);
+    const ast = try std.zig.Ast.parse(arena, src, .{});
     if (ast.errors.len != 0) {
         std.debug.print("Generated Zig source contains error, this is a bug in asset-bundler!\n", .{});
 
