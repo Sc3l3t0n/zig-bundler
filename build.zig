@@ -76,7 +76,7 @@ fn setupSnapshotTests(b: *std.Build, test_step: *std.Build.Step) !void {
     git_add.setName("git add tests/");
     diff.step.dependOn(&git_add.step);
 
-    const tests_dir = try b.root.root_dir.handle.openDir(b.graph.io, "tests", .{ .iterate = true });
+    const tests_dir = b.root.root_dir.handle.openDir(b.graph.io, "tests", .{ .iterate = true }) catch return;
     var it = tests_dir.iterateAssumeFirstIteration();
     while (try it.next(b.graph.io)) |entry| {
         if (entry.kind != .directory) continue;
